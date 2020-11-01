@@ -1,0 +1,45 @@
+/*Q1.求12與6的和、積(使用簡單工廠SimpleFactory)*/
+package question01;
+
+interface Statements {
+	public int getResult(int a, int b);
+}
+
+class Addition implements Statements{
+	@Override
+	public int getResult(int a, int b) {
+		return a+b;
+	}
+}
+
+class Multiplication implements Statements{
+	@Override
+	public int getResult(int a, int b) {
+		return a*b;
+	}
+}
+
+class Calculator {
+	public static Statements operator(String op) {
+		switch(op) {
+			case "+":
+				return new Addition();
+			case "*":
+				return new Multiplication();
+			default:
+				return null;
+		}
+	}
+}
+
+public class question01 {
+	public static void main(String[] args) {
+		Statements statement1 = Calculator.operator("+");
+		int result1 = statement1.getResult(12,6);
+		System.out.println("12+6="+result1);
+		
+		Statements statement2 = Calculator.operator("*");
+		int result2 = statement2.getResult(12,6);
+		System.out.println("12*6="+result2);
+	}
+}
